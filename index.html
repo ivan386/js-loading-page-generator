@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<title>"Loading..." page generator</title>
+		<script src="generator.js"></script>
+		<base href="https://gateway.ipfs.io/" />
+		<style>
+			a{
+				display: block;
+			}
+			a::before{
+				content: attr(href);
+			}
+			input{
+				width: 50em;
+				font-family: monospace;
+			}
+		</style>
+		<script>
+			function generate()
+			{
+				var redirect = document.getElementById("redirect").value;
+				var template = document.getElementById("template").value;
+				var advanced_page = document.getElementById("advanced").value;
+				
+				
+				var simple_page = template.replace("[url]", redirect);
+				if (!advanced_page)
+					simple_page = template.replace("<iframe src=.html>", '');
+				
+				var a = document.body.appendChild(document.createElement("A"))
+				.setAttribute(
+					"href"
+					, inline_page(simple_page, advanced_page)
+				);
+			}
+		</script>
+	</head>
+	<body>
+"Loading..." page generator make link that show "Loading..." message on page while link it redirect to is loading.
+		<pre>
+                 Link redirect to: <input id="redirect" value="/ipfs/QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQw"/>
+Simple "Loading..." page template: <input id="template" value='Loading...<meta http-equiv=refresh content=0;url=[url]><iframe src=.html>'/>
+  Advanced "Loading..." page link: <input id="advanced" value='/ipfs/QmQs6iRgSqix8dSgW3ooLDVXFRuoW9qLppVeY3ARnsjFx1'/><details>
+This link point to page that open in iframe of simple "Loading..." page. It can be ipfs link to html file or catalog that contain "index.html" file.
+</details>
+                                   <button onclick="generate()">Generate link</button>
+		</pre>
+	</body>
+
+</html>

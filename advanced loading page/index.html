@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<style>
+			body{
+				background: white center no-repeat url(loading.svg);
+				height: 100vh;
+				margin: 0;
+			}
+			body::after{
+				content: "This site is powered by InterPlanetary File System.";
+				position: fixed;
+				bottom: 0;
+				text-align: center;
+				display: block;
+				width: 100%;
+			}
+		</style>
+		<script>
+			parent.document.head.appendChild(document.createElement("style")).textContent = `
+				iframe{
+					position: fixed;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					border: none;
+				}
+			`
+			parent.document.head.appendChild(document.createElement("title")).textContent = "Loading..."
+			var icon = parent.document.head.appendChild(document.createElement("link"))
+			icon.setAttribute("rel", "icon")
+			icon.setAttribute("href", ".html/loading.svg")
+		</script>
+	</head>
+	<body>
+		Loading...
+	</body>
+</html>
